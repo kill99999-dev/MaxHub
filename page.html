@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Redirect</title>
+</head>
+<body>
+    <form action="pagina.html" method="get" onsubmit="return redirectToPage()">
+        <input type="text" id="inputText" name="query" placeholder="Inserisci testo">
+        <button type="submit">Vai</button>
+        <button onclick="openApp()">Apri l'app</button>
+    </form>
+
+    <script>
+        function redirectToPage() {
+            const input = document.getElementById('inputText').value;
+            location.href = input;
+            return false; // Previene l'invio del form
+        }
+    </script>
+    <script>
+        function openApp() {
+            window.close()
+            window.open("page.html","popup","width=600,height=400,scrollbar=yes")
+        }
+    </script>
+</body>
+</html>

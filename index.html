@@ -1,0 +1,119 @@
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<script>
+function checkValues() {
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+
+      if (email === "" || password === "") {
+        alert("Compila i campi.");
+        return;
+      }
+
+      if (email === "defaultuser0" && password === "changeme") {
+        alert("Accesso riuscito.");
+        window.close();
+      } else {
+        alert("Email o password errati.");
+      }
+    }
+checkValue();
+</script>
+<script type="text/javascript">
+function saveCredentials() {
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+      localStorage.setItem('isLoggedIn', true);
+      window.open(email.split('@')[0] + ".html", "popup", "width=600,height=400,scrollbars=yes");
+      window.close();
+    }
+    window.onload = function() {
+      let isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn) {
+        let email = localStorage.getItem('email');
+        window.open(email.split('@')[0] + ".html", "popup", "width=600,height=400,scrollbars=yes");
+        window.close();
+      }
+    };
+</script>
+<div onload="login()"></div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxHub - Accedi</title>
+    <style>      
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px; /* Larghezza della scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #e4e4e4; /* Colore di fondo della track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #595959; /* Colore della thumb */
+      border-radius: 10px; /* Raggio del bordo della thumb */
+      border: 3px solid #e4e4e4; /* Bordo della thumb */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #695f56; /* Colore della thumb quando toccata */
+    }
+    html{
+      width: 100%;
+      height: 100%;
+      background-image: url("background.bmp");
+    }
+    #logindiv{
+      width: 640px;
+      height: 480px;
+      background-color: #e4e4e4;
+      border-radius: 5px;
+      position: fixed;
+      top: calc(50% - 240px);
+      left: calc(50% - 320px);
+    }
+    #email{
+      width: 600px;
+      height: 40px;
+      position: relative;
+      left: 20px;
+      top: 20px;
+      font-family: gg sans;
+      border-color: #595959;
+      border-width: 2px;
+    }
+    #password{
+      width: 600px;
+      height: 40px;
+      position: relative;
+      left: 20px;
+      top: 30px;
+      font-family: gg sans;
+      border-color: #595959;
+      border-width: 2px;
+    }
+    #button1{
+      width: 600px;
+      height: 40px;
+      position: relative;
+      left: 20px;
+      top: 40px;
+      font-family: gg sans;
+      border-color: #595959;
+      border-width: 2px;
+    }
+    </style>
+</head>
+<body>
+  <div id="logindiv">
+    <input type="email" id="email" placeholder="E-mail"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="button1" onclick="checkValues(); saveCredentials();">Accedi e procedi sull'app</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<script>
+    function apriLApp() {
+        window.open("public_wiz-khalifa-see-you-again.html", "popup", "width=600,height=400,scrollbars=yes");
+    }
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ascolta See You Again di Wiz Khalifa - MaxHub</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    html{
+        background-color: #caf4ff;
+    }
+
+    #audioPlayer {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .controls {
+      display: flex;
+      margin-top: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .control-button {
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+      margin: 0 10px;
+      cursor: pointer;
+      position: relative;
+      left: 10px;
+      bottom: 10px;
+    }
+
+    #playPause {
+      background-image: url('play.bmp');
+      border-radius: 5px;
+    }
+
+    #backward {
+      background-image: url('backward.bmp');
+      border-radius: 5px;
+    }
+
+    #forward {
+      background-image: url('forward.bmp');
+      border-radius: 5px;
+    }
+
+    #settings {
+      background-image: url('settings.png');
+      border-radius: 5px;
+    }
+
+    #progressBar {
+      width: 100%;
+      height: 10px;
+      background: #ccc;
+      margin-top: 20px;
+      position: absolute;
+      cursor: pointer;
+      left: 0;
+      bottom: 70px;
+    }
+
+    #progress {
+      height: 100%;
+      background: #99D9EA;
+      width: 0%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #currentTime{
+        font-family: gg sans;
+        position: absolute;
+        left: 300px;
+        bottom: 10px;
+    }
+    #totalTime{
+        font-family: gg sans;
+        position: absolute;
+        left: 380px;
+        bottom: 10px;
+    }
+    #containerDiv{
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        background-color: #caf4ff;
+    }
+    #appbutton{
+        background-color: #99D9EA;
+        font-family: gg sans;
+        position: absolute;
+        width: 100px;
+        height: 30px;
+        bottom: 20px;
+        right: 20px;
+        z-index: 2;
+        border: none;
+        border-radius: 5px;
+    }
+    #settingsmenu{
+        width: 400px;
+        height: 200px;
+        position: absolute;
+        bottom: 100px;
+        left: 100px;
+        background-color: #caf4ff;
+        border-radius: 5px;
+        display: none;
+    }
+    #settingsp1{
+        font-family: gg sans;
+        position: absolute;
+        left: 300px;
+        top: 20px;
+    }
+    #settingsname1{
+        font-family: gg sans;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+    #settingsbutton1{
+        position: absolute;
+        left: 0px;
+        border: none;
+        border-radius: 5px;
+        background-color: #99D9EA;
+        width: 400px;
+        height: 100px;
+    }
+    #settingsp2{
+        font-family: gg sans;
+        position: absolute;
+        left: 300px;
+        top: 120px;
+    }
+    #settingsname2{
+        font-family: gg sans;
+        position: absolute;
+        left: 20px;
+        top: 120px;
+    }
+    #settingsbutton2{
+        position: absolute;
+        left: 0px;
+        top: 100px;
+        border: none;
+        border-radius: 5px;
+        background-color: #99D9EA;
+        width: 400px;
+        height: 100px;
+    }
+  </style>
+</head>
+<body>
+    <div id="settingsmenu">
+        <button id="settingsbutton1"></button>
+        <p id="settingsp1">Non disp.</p>
+        <p id="settingsname1">Qualità</p>
+        <button id="settingsbutton2"></button>
+        <p id="settingsp2">Non disp.</p>
+        <p id="settingsname2">Sottotitoli</p>
+    </div>
+    <button id="appbutton" onclick="apriLApp()">Apri l'app</button>
+    <div id="containerDiv"></div>
+  <audio id="audioPlayer" src="public_wiz-khalifa-see-you-again.mp3"></audio>
+  
+  <div class="controls">
+    <div id="backward" class="control-button" onclick="seek(-10)"></div>
+    <div id="playPause" class="control-button" onclick="togglePlayPause()"></div>
+    <div id="forward" class="control-button" onclick="seek(10)"></div>
+    <div id="settings" class="control-button" onclick="opnClsMenu()"></div>
+  </div>
+  
+  <div id="progressBar" onclick="setAudioProgress(event)">
+    <div id="progress"></div>
+  </div>
+
+  <p id="currentTime">0:00:00</p>
+  <p id="totalTime">0:00:00</p>
+
+  <script>
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseButton = document.getElementById('playPause');
+    const progressBar = document.getElementById('progressBar');
+    const progress = document.getElementById('progress');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const totalTimeDisplay = document.getElementById('totalTime');
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+      totalTimeDisplay.textContent = formatTime(audioPlayer.duration);
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+      const currentTime = audioPlayer.currentTime;
+      const duration = audioPlayer.duration;
+      progress.style.width = (currentTime / duration) * 100 + '%';
+      currentTimeDisplay.textContent = formatTime(currentTime);
+    });
+
+    function togglePlayPause() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseButton.style.backgroundImage = "url('pause.bmp')";
+      } else {
+        audioPlayer.pause();
+        playPauseButton.style.backgroundImage = "url('play.bmp')";
+      }
+    }
+
+    function seek(seconds) {
+      audioPlayer.currentTime += seconds;
+    }
+
+    function setAudioProgress(event) {
+      const rect = progressBar.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const duration = audioPlayer.duration;
+      audioPlayer.currentTime = (offsetX / progressBar.clientWidth) * duration;
+    }
+
+    function formatTime(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+  </script>
+  <script>
+    function opnClsMenu() {
+        var div = document.getElementById('settingsmenu');
+      if (div.style.display === 'none') {
+        div.style.display = 'block';
+      } else {
+        div.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<script type="text/javascript">
+  window.onload = function() {
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
+    let isLoggedIn = localStorage.getItem('isLoggedIn');
+    
+    if (email && password) {
+      document.getElementById('emailDisplay').textContent = email;
+      if (isLoggedIn) {
+        document.getElementById('editSection').style.display = 'block';
+      } else {
+        alert("Visualizzazione solo. Effettua il login per modificare.");
+        document.getElementById('editSection').style.display = 'none';
+      }
+    } else {
+      alert("Credenziali non trovate. Effettua il login.");
+      window.location.href = "index.html";
+    }
+  };
+
+  function logout() {
+    localStorage.removeItem('isLoggedIn');
+    alert("Logout effettuato. Ora visualizzi solo.");
+    window.location.href = window.location.href; // ricarica la pagina
+  }
+</script>
+<style>
+  #editSection { display: none; }
+</style>
+</head>
+<body>
+<h1>Pagina del Profilo</h1>
+<p>Email: <span id="emailDisplay"></span></p>
+<div id="editSection">
+  <h2>Modifica Profilo</h2>
+  <!-- Campi di modifica -->
+  <button onclick="logout()">Logout</button>
+</div>
