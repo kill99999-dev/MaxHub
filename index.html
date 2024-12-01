@@ -1,42 +1,4 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-<script>
-function checkValues() {
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value;
-
-      if (email === "" || password === "") {
-        alert("Compila i campi.");
-        return;
-      }
-
-      if (email === "defaultuser0" && password === "changeme") {
-        alert("Accesso riuscito.");
-        window.close();
-      } else {
-        alert("Email o password errati.");
-      }
-    }
-checkValue();
-</script>
-<script type="text/javascript">
-function saveCredentials() {
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value;
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-      localStorage.setItem('isLoggedIn', true);
-      window.open(email.split('@')[0] + ".html", "popup", "width=600,height=400,scrollbars=yes");
-      window.close();
-    }
-    window.onload = function() {
-      let isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (isLoggedIn) {
-        let email = localStorage.getItem('email');
-        window.open(email.split('@')[0] + ".html", "popup", "width=600,height=400,scrollbars=yes");
-        window.close();
-      }
-    };
-</script>
 <div onload="login()"></div>
 <!DOCTYPE html>
 <html lang="it">
@@ -77,26 +39,6 @@ function saveCredentials() {
       top: calc(50% - 240px);
       left: calc(50% - 320px);
     }
-    #email{
-      width: 600px;
-      height: 40px;
-      position: relative;
-      left: 20px;
-      top: 20px;
-      font-family: gg sans;
-      border-color: #595959;
-      border-width: 2px;
-    }
-    #password{
-      width: 600px;
-      height: 40px;
-      position: relative;
-      left: 20px;
-      top: 30px;
-      font-family: gg sans;
-      border-color: #595959;
-      border-width: 2px;
-    }
     #button1{
       width: 600px;
       height: 40px;
@@ -111,9 +53,7 @@ function saveCredentials() {
 </head>
 <body>
   <div id="logindiv">
-    <input type="email" id="email" placeholder="E-mail"><br>
-    <input type="password" id="password" placeholder="Password"><br>
-    <button id="button1" onclick="checkValues(); saveCredentials();">Accedi e procedi sull'app</button>
+    <button id="button1">è in corso un aggiornamento del sito...</button>
   </div>
 </body>
 </html>
