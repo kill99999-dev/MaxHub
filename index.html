@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaxHub - Aggiornamento in corso...</title>
+    <title>Connessione diretta - MaxHub</title>
     <style>      
     html{
       width: 100%;
@@ -26,7 +26,17 @@
       height: 40px;
       position: relative;
       left: 20px;
-      top: 40px;
+      top: 80px;
+      font-family: gg sans;
+      border-color: #595959;
+      border-width: 2px;
+    }
+    #input{
+      width: 600px;
+      height: 40px;
+      position: relative;
+      left: 20px;
+      top: 80px;
       font-family: gg sans;
       border-color: #595959;
       border-width: 2px;
@@ -35,7 +45,19 @@
 </head>
 <body>
   <div id="logindiv">
-    <button id="button1">è in corso un aggiornamento del sito...</button>
+    <input id="nome" type="text">
+    <button id="button1" onclick="vai()">Procedi</button>
   </div>
 </body>
 </html>
+  <script>
+    function vai() {
+      var nomeGuida = document.getElementById('nome').value;
+      if (nomeGuida) {
+        var link = 'public_help.' + nomeGuida;
+        window.location.href = link;
+      } else {
+        alert('Codice non valido, si prega di riprovare.');
+      }
+    }
+  </script>
